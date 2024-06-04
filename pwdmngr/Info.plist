@@ -11,5 +11,7 @@
 		<string>ClashGrotesk-Regular.otf</string>
 		<string>ClashGrotesk-Semibold.otf</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>To help you generate more random passwords.</string>
 </dict>
 </plist>

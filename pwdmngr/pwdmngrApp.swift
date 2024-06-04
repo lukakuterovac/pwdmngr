@@ -11,7 +11,23 @@ import SwiftUI
 struct pwdmngrApp: App {
     var body: some Scene {
         WindowGroup {
+            MainTabView()
+        }
+    }
+}
+
+struct MainTabView: View {
+    var body: some View {
+        TabView {
             ContentView()
+                .tabItem {
+                    CustomLabel(title: "Passwords", systemImage: "list.dash", font: .customFont(font: .lato, style: .regular))
+                }
+            
+            PasswordGeneratorView()
+                .tabItem {
+                    CustomLabel(title: "Generator", systemImage: "lock.rotation", font: .customFont(font: .lato, style: .regular))
+                }
         }
     }
 }
