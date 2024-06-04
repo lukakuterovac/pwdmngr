@@ -150,8 +150,8 @@ struct PasswordGeneratorView: View {
         if characters.isEmpty {
             generatedPassword = "Select at least one character type"
         } else {
-            let sensorSeed = sensorData.generateSensorSeed()
-            var randomGenerator = SeededRandomNumberGenerator(seed: sensorSeed)
+            let seed = sensorData.generateSensorSeed()
+            var randomGenerator = SeededRandomNumberGenerator(seed: seed)
             generatedPassword = String((0..<length).compactMap { _ in characters.randomElement(using: &randomGenerator) })
         }
     }

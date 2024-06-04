@@ -8,10 +8,15 @@
 import Foundation
 
 struct SeededRandomNumberGenerator: RandomNumberGenerator {
-    var seed: UInt64
+    private var seed: UInt64
+    
+    init(seed: UInt64) {
+        self.seed = seed
+    }
     
     mutating func next() -> UInt64 {
-        seed = seed &* 6364136223846793005 &+ 1
+        seed = seed &* 1103515245 &+ 12345
         return seed
     }
 }
+

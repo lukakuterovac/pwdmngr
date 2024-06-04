@@ -76,6 +76,9 @@ class SensorDataViewModel: NSObject, ObservableObject, CLLocationManagerDelegate
         
         let currentTime = UInt64(Date().timeIntervalSince1970 * 1_000_000)
         seed ^= currentTime
+
+        let randomNumber = UInt64(arc4random())
+        seed ^= randomNumber
         
         return seed
     }
