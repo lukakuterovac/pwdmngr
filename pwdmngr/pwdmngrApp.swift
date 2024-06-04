@@ -19,7 +19,7 @@ struct pwdmngrApp: App {
 struct MainTabView: View {
     var body: some View {
         TabView {
-            ContentView()
+            PasswordListView()
                 .tabItem {
                     CustomLabel(title: "Passwords", systemImage: "list.dash", font: .customFont(font: .lato, style: .regular))
                 }

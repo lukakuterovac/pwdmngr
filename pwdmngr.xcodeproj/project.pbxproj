@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		694360CF2C0EF2AF008EA1A8 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694360CE2C0EF2AF008EA1A8 /* CustomLabel.swift */; };
+		694360D32C0EF902008EA1A8 /* PasswordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694360D22C0EF902008EA1A8 /* PasswordListView.swift */; };
+		694360D52C0EF9A2008EA1A8 /* PasswordListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694360D42C0EF9A2008EA1A8 /* PasswordListViewModel.swift */; };
+		694360D82C0EF9C8008EA1A8 /* PasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694360D72C0EF9C8008EA1A8 /* PasswordItem.swift */; };
+		694360DA2C0EF9F6008EA1A8 /* PasswordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694360D92C0EF9F6008EA1A8 /* PasswordCard.swift */; };
 		69DC35BD2C0E3C660002D39D /* pwdmngrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC35BC2C0E3C660002D39D /* pwdmngrApp.swift */; };
 		69DC35BF2C0E3C660002D39D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC35BE2C0E3C660002D39D /* ContentView.swift */; };
 		69DC35C12C0E3C680002D39D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69DC35C02C0E3C680002D39D /* Assets.xcassets */; };
@@ -27,6 +31,10 @@
 
 /* Begin PBXFileReference section */
 		694360CE2C0EF2AF008EA1A8 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		694360D22C0EF902008EA1A8 /* PasswordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListView.swift; sourceTree = "<group>"; };
+		694360D42C0EF9A2008EA1A8 /* PasswordListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListViewModel.swift; sourceTree = "<group>"; };
+		694360D72C0EF9C8008EA1A8 /* PasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordItem.swift; sourceTree = "<group>"; };
+		694360D92C0EF9F6008EA1A8 /* PasswordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCard.swift; sourceTree = "<group>"; };
 		69DC35B92C0E3C660002D39D /* pwdmngr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pwdmngr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69DC35BC2C0E3C660002D39D /* pwdmngrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pwdmngrApp.swift; sourceTree = "<group>"; };
 		69DC35BE2C0E3C660002D39D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,8 +69,17 @@
 			isa = PBXGroup;
 			children = (
 				694360CE2C0EF2AF008EA1A8 /* CustomLabel.swift */,
+				694360D92C0EF9F6008EA1A8 /* PasswordCard.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		694360D62C0EF9B3008EA1A8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				694360D72C0EF9C8008EA1A8 /* PasswordItem.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		69DC35B02C0E3C660002D39D = {
@@ -84,6 +101,7 @@
 		69DC35BB2C0E3C660002D39D /* pwdmngr */ = {
 			isa = PBXGroup;
 			children = (
+				694360D62C0EF9B3008EA1A8 /* Models */,
 				694360CD2C0EF29F008EA1A8 /* Components */,
 				69DC35E62C0E69080002D39D /* Tools */,
 				69DC35E32C0E674C0002D39D /* ViewModels */,
@@ -133,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				69DC35E12C0E5AE20002D39D /* PasswordGeneratorView.swift */,
+				694360D22C0EF902008EA1A8 /* PasswordListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -141,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				69DC35E42C0E67790002D39D /* SensorDataViewModel.swift */,
+				694360D42C0EF9A2008EA1A8 /* PasswordListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -229,13 +249,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				694360D82C0EF9C8008EA1A8 /* PasswordItem.swift in Sources */,
 				69DC35E22C0E5AE20002D39D /* PasswordGeneratorView.swift in Sources */,
 				69DC35DF2C0E59450002D39D /* TextExtension.swift in Sources */,
 				69DC35E52C0E67790002D39D /* SensorDataViewModel.swift in Sources */,
+				694360D52C0EF9A2008EA1A8 /* PasswordListViewModel.swift in Sources */,
+				694360D32C0EF902008EA1A8 /* PasswordListView.swift in Sources */,
 				69DC35DD2C0E58DC0002D39D /* CustomFont.swift in Sources */,
 				69DC35E82C0E69330002D39D /* SeededRandomNumberGenerator.swift in Sources */,
 				69DC35BF2C0E3C660002D39D /* ContentView.swift in Sources */,
 				69DC35BD2C0E3C660002D39D /* pwdmngrApp.swift in Sources */,
+				694360DA2C0EF9F6008EA1A8 /* PasswordCard.swift in Sources */,
 				694360CF2C0EF2AF008EA1A8 /* CustomLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
