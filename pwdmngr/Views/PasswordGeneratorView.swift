@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PasswordGeneratorView: View {
-    @StateObject private var sensorData = SensorDataViewModel()
+    @StateObject private var sensorData = SensorDataManager()
     @State private var isShowingFullPassword: Bool = false
     @State private var isOptionsExpanded: Bool = false
     @State private var includeLowercase: Bool = true

@@ -25,7 +25,7 @@
 		69DC35DD2C0E58DC0002D39D /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC35DC2C0E58DC0002D39D /* CustomFont.swift */; };
 		69DC35DF2C0E59450002D39D /* TextExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC35DE2C0E59450002D39D /* TextExtension.swift */; };
 		69DC35E22C0E5AE20002D39D /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC35E12C0E5AE20002D39D /* PasswordGeneratorView.swift */; };
-		69DC35E52C0E67790002D39D /* SensorDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC35E42C0E67790002D39D /* SensorDataViewModel.swift */; };
+		69DC35E52C0E67790002D39D /* SensorDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC35E42C0E67790002D39D /* SensorDataManager.swift */; };
 		69DC35E82C0E69330002D39D /* SeededRandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC35E72C0E69330002D39D /* SeededRandomNumberGenerator.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +50,7 @@
 		69DC35DC2C0E58DC0002D39D /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		69DC35DE2C0E59450002D39D /* TextExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtension.swift; sourceTree = "<group>"; };
 		69DC35E12C0E5AE20002D39D /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
-		69DC35E42C0E67790002D39D /* SensorDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorDataViewModel.swift; sourceTree = "<group>"; };
+		69DC35E42C0E67790002D39D /* SensorDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorDataManager.swift; sourceTree = "<group>"; };
 		69DC35E72C0E69330002D39D /* SeededRandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededRandomNumberGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +82,13 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		6963FFEF2C0F32F600ABF9B4 /* ViewStates */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewStates;
+			sourceTree = "<group>";
+		};
 		69DC35B02C0E3C660002D39D = {
 			isa = PBXGroup;
 			children = (
@@ -103,8 +110,9 @@
 			children = (
 				694360D62C0EF9B3008EA1A8 /* Models */,
 				694360CD2C0EF29F008EA1A8 /* Components */,
-				69DC35E62C0E69080002D39D /* Tools */,
+				69DC35E62C0E69080002D39D /* Helpers */,
 				69DC35E32C0E674C0002D39D /* ViewModels */,
+				6963FFEF2C0F32F600ABF9B4 /* ViewStates */,
 				69DC35E02C0E5AAF0002D39D /* Views */,
 				69DC35CC2C0E53F20002D39D /* Fonts */,
 				69DC35BC2C0E3C660002D39D /* pwdmngrApp.swift */,
@@ -159,18 +167,18 @@
 		69DC35E32C0E674C0002D39D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				69DC35E42C0E67790002D39D /* SensorDataViewModel.swift */,
 				694360D42C0EF9A2008EA1A8 /* PasswordListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		69DC35E62C0E69080002D39D /* Tools */ = {
+		69DC35E62C0E69080002D39D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				69DC35E42C0E67790002D39D /* SensorDataManager.swift */,
 				69DC35E72C0E69330002D39D /* SeededRandomNumberGenerator.swift */,
 			);
-			path = Tools;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,7 +260,7 @@
 				694360D82C0EF9C8008EA1A8 /* PasswordItem.swift in Sources */,
 				69DC35E22C0E5AE20002D39D /* PasswordGeneratorView.swift in Sources */,
 				69DC35DF2C0E59450002D39D /* TextExtension.swift in Sources */,
-				69DC35E52C0E67790002D39D /* SensorDataViewModel.swift in Sources */,
+				69DC35E52C0E67790002D39D /* SensorDataManager.swift in Sources */,
 				694360D52C0EF9A2008EA1A8 /* PasswordListViewModel.swift in Sources */,
 				694360D32C0EF902008EA1A8 /* PasswordListView.swift in Sources */,
 				69DC35DD2C0E58DC0002D39D /* CustomFont.swift in Sources */,

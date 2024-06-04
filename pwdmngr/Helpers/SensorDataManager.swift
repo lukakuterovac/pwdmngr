@@ -9,7 +9,7 @@ import Foundation
 import CoreMotion
 import CoreLocation
 
-class SensorDataViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+class SensorDataManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let motionManager = CMMotionManager()
     private let locationManager = CLLocationManager()
     
