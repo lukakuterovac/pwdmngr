@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct PasswordGeneratorView: View {
-    @StateObject private var sensorData = SensorDataManager()
-    @State private var isShowingFullPassword: Bool = false
-    @State private var isOptionsExpanded: Bool = false
-    @State private var includeLowercase: Bool = true
-    @State private var includeUppercase: Bool = false
-    @State private var includeNumbers: Bool = false
-    @State private var includeSpecialCharacters: Bool = false
-    @State private var passwordLength: Double = 32
-    @State private var generatedPassword: String = ""
+    @StateObject private var viewModel = PasswordGeneratorViewModel()
+    @ObservedObject private var viewState: PasswordGeneratorViewState
+    
+    init() {
+        let viewModel = PasswordGeneratorViewModel()
+        _viewModel = StateObject(wrappedValue: viewModel)
+        _viewState = ObservedObject(wrappedValue: viewModel.viewState)
+    }
     
     var body: some View {
         NavigationView {
@@ -29,12 +28,12 @@ struct PasswordGeneratorView: View {
                             Spacer()
                         }
                         HStack {
-                            if isShowingFullPassword {
-                                Text(generatedPassword)
+                            if viewState.isShowingFullPassword {
+                                Text(viewState.generatedPassword)
                                     .font(.customFont(font: .lato, style: .regular))
                                     .padding()
                             } else {
-                                Text(generatedPassword)
+                                Text(viewState.generatedPassword)
                                     .font(.customFont(font: .lato, style: .regular))
                                     .lineLimit(1)
                                     .truncationMode(.tail)
@@ -44,15 +43,17 @@ struct PasswordGeneratorView: View {
                             Spacer()
                             
                             HStack {
-                                Button(action: {
-                                    isShowingFullPassword.toggle()
-                                }) {
-                                    Image(systemName: isShowingFullPassword ? "eye.slash" : "eye")
-                                        .foregroundStyle(.foreground)
+                                if viewState.passwordLength >= 26 {
+                                    Button(action: {
+                                        viewState.isShowingFullPassword.toggle()
+                                    }) {
+                                        Image(systemName: viewState.isShowingFullPassword ? "eye.slash" : "eye")
+                                            .foregroundStyle(.foreground)
+                                    }
                                 }
                                 
                                 Button(action: {
-                                    UIPasteboard.general.string = generatedPassword
+                                    UIPasteboard.general.string = viewState.generatedPassword
                                 }) {
                                     Image(systemName: "doc.on.clipboard")
                                         .foregroundStyle(.foreground)
@@ -68,34 +69,34 @@ struct PasswordGeneratorView: View {
                     }
                     .padding()
                     
-                    Button(action: generatePassword) {
+                    Button(action: viewModel.generatePassword) {
                         Text("Generate Password")
                             .font(.customFont(font: .lato, style: .regular, size: .h2))
                             .foregroundColor(.white)
                             .padding()
                             .frame(maxWidth: .infinity)
-                            .background(anyToggleSelected() ? Color.blue : Color.gray)
+                            .background(viewModel.anyToggleSelected() ? Color.blue : Color.gray)
                             .cornerRadius(10)
                     }
                     .padding()
-                    .disabled(!anyToggleSelected())
+                    .disabled(!viewModel.anyToggleSelected())
                     
-                    DisclosureGroup("Options", isExpanded: $isOptionsExpanded) {
+                    DisclosureGroup("Options", isExpanded: $viewState.isOptionsExpanded) {
                         VStack(alignment: .leading) {
-                            Toggle("Include lowercase letters", isOn: $includeLowercase)
-                            Toggle("Include uppercase letters", isOn: $includeUppercase)
-                            Toggle("Include numbers", isOn: $includeNumbers)
-                            Toggle("Include special characters", isOn: $includeSpecialCharacters)
+                            Toggle("Include lowercase letters", isOn: $viewState.includeLowercase)
+                            Toggle("Include uppercase letters", isOn: $viewState.includeUppercase)
+                            Toggle("Include numbers", isOn: $viewState.includeNumbers)
+                            Toggle("Include special characters", isOn: $viewState.includeSpecialCharacters)
                             
                             VStack {
                                 HStack {
                                     Text("Length")
                                         .font(.customFont(font: .lato, style: .regular))
                                     Spacer()
-                                    Text("\(Int(passwordLength))")
+                                    Text("\(Int(viewState.passwordLength))")
                                         .font(.customFont(font: .lato, style: .regular))
                                 }
-                                Slider(value: $passwordLength, in: 6...256, step: 1) {
+                                Slider(value: $viewState.passwordLength, in: 6...256, step: 1) {
                                     Text("Length")
                                         .font(.customFont(font: .lato, style: .regular))
                                 } minimumValueLabel: {
@@ -115,7 +116,7 @@ struct PasswordGeneratorView: View {
                     Spacer()
                 }
                 .onAppear {
-                    generatePassword()
+                    viewModel.generatePassword()
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -129,35 +130,6 @@ struct PasswordGeneratorView: View {
                 }
             }
         }
-    }
-    
-    func generatePassword() {
-        var characters = ""
-        if includeLowercase {
-            characters += "abcdefghijklmnopqrstuvwxyz"
-        }
-        if includeUppercase {
-            characters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        }
-        if includeNumbers {
-            characters += "0123456789"
-        }
-        if includeSpecialCharacters {
-            characters += "!@#$%^&*()_+{}|:<>?-=[]\\;',./"
-        }
-        
-        let length = Int(passwordLength)
-        if characters.isEmpty {
-            generatedPassword = "Select at least one character type"
-        } else {
-            let seed = sensorData.generateSensorSeed()
-            var randomGenerator = SeededRandomNumberGenerator(seed: seed)
-            generatedPassword = String((0..<length).compactMap { _ in characters.randomElement(using: &randomGenerator) })
-        }
-    }
-    
-    func anyToggleSelected() -> Bool {
-        return includeLowercase || includeUppercase || includeNumbers || includeSpecialCharacters
     }
 }
 
