@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct PasswordListView: View {
-    @ObservedObject var viewModel = PasswordListViewModel()
+    @StateObject private var viewModel = PasswordListViewModel()
+    @ObservedObject private var viewState: PasswordListViewState
+    
+    init() {
+        let viewModel = PasswordListViewModel()
+        _viewModel = StateObject(wrappedValue: viewModel)
+        _viewState = ObservedObject(wrappedValue: viewModel.viewState)
+    }
     
     var body: some View {
         NavigationStack {
             VStack {
-                List(viewModel.passwordItems) { item in
+                List(viewState.passwordItems) { item in
                     PasswordCard(passwordItem: item)
                 }
                 .listStyle(.plain)
