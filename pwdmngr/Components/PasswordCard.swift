@@ -11,8 +11,10 @@ struct PasswordCard: View {
     let passwordItem: PasswordItem
     
     var body: some View {
+        let faviconURL = "\(passwordItem.url)/favicon.ico"
+        
         HStack {
-            if let faviconURL = URL(string: "\(passwordItem.url)/favicon.ico") {
+            if let faviconURL = URL(string: faviconURL) {
                 AsyncImage(url: faviconURL) { image in
                     image.resizable()
                         .aspectRatio(contentMode: .fit)
@@ -40,19 +42,14 @@ struct PasswordCard: View {
             Spacer()
         }
         .padding()
-        .background(
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.black, lineWidth: 1)
-                .background(Color.white.cornerRadius(10))
+                .stroke(Color.secondary, lineWidth: 1)
         )
-        .onTapGesture {
-            // Handle tap gesture here
-        }
     }
 }
 
 #Preview {
-    PasswordCard(passwordItem: PasswordItem(
-        name: "Google", username: "user@gmail.com", url: "https://www.google.com")
-    )
+    PasswordCard(passwordItem: PasswordItem.createMockPasswordItem())
 }

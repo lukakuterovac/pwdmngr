@@ -20,10 +20,16 @@ struct PasswordListView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                List(viewState.passwordItems) { item in
-                    PasswordCard(passwordItem: item)
+                ScrollView {
+                    ForEach(viewState.passwordItems) { item in
+                        NavigationLink(destination: PasswordDetailsView(passwordItem: item)
+                        ) {
+                            PasswordCard(passwordItem: item)
+                                .padding(.horizontal)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
                 }
-                .listStyle(.plain)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
