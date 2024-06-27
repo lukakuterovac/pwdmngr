@@ -17,6 +17,11 @@ struct PasswordGeneratorView: View {
         _viewState = ObservedObject(wrappedValue: viewModel.viewState)
     }
     
+    private var starsCount: String {
+        let count = min(viewState.generatedPassword.count, 32)
+        return String(repeating: "*", count: count)
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -33,7 +38,7 @@ struct PasswordGeneratorView: View {
                                     .font(.customFont(font: .lato, style: .regular))
                                     .padding()
                             } else {
-                                Text(viewState.generatedPassword)
+                                Text(starsCount)
                                     .font(.customFont(font: .lato, style: .regular))
                                     .lineLimit(1)
                                     .truncationMode(.tail)
@@ -43,14 +48,13 @@ struct PasswordGeneratorView: View {
                             Spacer()
                             
                             HStack {
-                                if viewState.passwordLength >= 26 {
-                                    Button(action: {
-                                        viewState.isShowingFullPassword.toggle()
-                                    }) {
-                                        Image(systemName: viewState.isShowingFullPassword ? "eye.slash" : "eye")
-                                            .foregroundStyle(.foreground)
-                                    }
+                                Button(action: {
+                                    viewState.isShowingFullPassword.toggle()
+                                }) {
+                                    Image(systemName: viewState.isShowingFullPassword ? "eye.slash" : "eye")
+                                        .foregroundStyle(.foreground)
                                 }
+                                
                                 
                                 Button(action: {
                                     UIPasteboard.general.string = viewState.generatedPassword
@@ -63,8 +67,10 @@ struct PasswordGeneratorView: View {
                         }
                         .background(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.black, lineWidth: 1)
-                                .background(Color.white.cornerRadius(10))
+                                .stroke(Color.primary, lineWidth: 1)
+                                .background(
+                                    Color(UIColor.systemBackground).cornerRadius(10)
+                                )
                         )
                     }
                     .padding()
@@ -110,7 +116,7 @@ struct PasswordGeneratorView: View {
                         }
                         .padding()
                     }
-                    .foregroundStyle(.foreground)
+                    .foregroundStyle(.primary, .blue)
                     .padding()
                     
                     Spacer()
