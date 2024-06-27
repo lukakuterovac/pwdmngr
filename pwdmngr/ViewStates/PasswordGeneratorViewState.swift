@@ -16,7 +16,7 @@ class PasswordGeneratorViewState: ObservableObject {
     @Published var includeUppercase: Bool = false
     @Published var includeNumbers: Bool = false
     @Published var includeSpecialCharacters: Bool = false
-    @Published var passwordLength: Double = 6.0
+    @Published var passwordLength: Double = 32.0
     
     @Published var generatedPassword: String = ""
 }

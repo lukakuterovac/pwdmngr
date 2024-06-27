@@ -9,14 +9,18 @@ import SwiftUI
 
 @main
 struct pwdmngrApp: App {
+    @StateObject private var dataModel = PasswordDataModel()
+    
     var body: some Scene {
         WindowGroup {
             MainTabView()
+                .environmentObject(dataModel)
         }
     }
 }
 
 struct MainTabView: View {
+    
     var body: some View {
         TabView {
             PasswordListView()

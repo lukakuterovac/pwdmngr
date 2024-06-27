@@ -9,5 +9,9 @@ import Foundation
 import SwiftUI
 
 class PasswordListViewState: ObservableObject {
-    @Published var passwordItems: [PasswordItem] = PasswordItem.createMockPasswordItems()
+    @Published var passwordItems: [PasswordItem]
+    
+    init(passwordItems: [PasswordItem]) {
+        self.passwordItems = passwordItems
+    }
 }

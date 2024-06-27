@@ -7,12 +7,19 @@
 
 import Foundation
 
-struct PasswordItem: Identifiable {
+struct PasswordItem: Identifiable, Codable {
     var id = UUID()
     var name: String
     var username: String
     var password: String
     var url: String
+    
+    init(name: String = "", username: String = "", password: String = "", url: String = "") {
+        self.name = name
+        self.username = username
+        self.password = password
+        self.url = url
+    }
     
     static func createMockPasswordItem() -> PasswordItem {
         return PasswordItem(

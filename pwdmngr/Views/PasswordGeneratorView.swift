@@ -125,7 +125,6 @@ struct PasswordGeneratorView: View {
                     VStack {
                         Text("Generate")
                             .font(.customFont(font: .lato, style: .medium, size: 22))
-                            .foregroundColor(Color.black)
                     }
                 }
             }
