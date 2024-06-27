@@ -42,11 +42,14 @@ struct PasswordCard: View {
             Spacer()
         }
         .padding()
-        .background()
-        .shadow(radius: 3)
-        .overlay(
+        .background(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.secondary, lineWidth: 1)
+                .fill(Color(.systemBackground))
+                .shadow(radius: 3)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.secondary, lineWidth: 1)
+                )
         )
     }
 }
