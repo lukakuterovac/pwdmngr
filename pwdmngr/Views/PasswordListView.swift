@@ -27,6 +27,7 @@ struct PasswordListView: View {
                         ) {
                             PasswordCard(passwordItem: item)
                                 .padding(.horizontal)
+                                .padding(.vertical, 3)
                         }
                         .buttonStyle(PlainButtonStyle())
                     }

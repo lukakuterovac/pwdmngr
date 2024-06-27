@@ -42,7 +42,8 @@ struct PasswordCard: View {
             Spacer()
         }
         .padding()
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .background()
+        .shadow(radius: 3)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.secondary, lineWidth: 1)
