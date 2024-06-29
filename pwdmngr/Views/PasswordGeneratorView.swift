@@ -87,44 +87,64 @@ struct PasswordGeneratorView: View {
                     .padding()
                     .disabled(!viewModel.anyToggleSelected())
                     
-                    DisclosureGroup("Options", isExpanded: $viewState.isOptionsExpanded) {
-                        VStack(alignment: .leading) {
-                            Toggle("Include lowercase letters", isOn: $viewState.includeLowercase)
-                            Toggle("Include uppercase letters", isOn: $viewState.includeUppercase)
-                            Toggle("Include numbers", isOn: $viewState.includeNumbers)
-                            Toggle("Include special characters", isOn: $viewState.includeSpecialCharacters)
-                            
-                            VStack {
-                                HStack {
-                                    Text("Length")
-                                        .font(.customFont(font: .lato, style: .regular))
-                                    Spacer()
-                                    Text("\(Int(viewState.passwordLength))")
-                                        .font(.customFont(font: .lato, style: .regular))
-                                }
-                                Slider(value: $viewState.passwordLength, in: 6...256, step: 1) {
-                                    Text("Length")
-                                        .font(.customFont(font: .lato, style: .regular))
-                                } minimumValueLabel: {
-                                    Text("6")
-                                        .font(.customFont(font: .lato, style: .regular))
-                                } maximumValueLabel: {
-                                    Text("256")
-                                        .font(.customFont(font: .lato, style: .regular))
-                                }
+                    VStack {
+                        HStack {
+                            Text("Options")
+                            Spacer()
+                            Image(systemName: viewState.isOptionsExpanded ? "chevron.down" : "chevron.up")
+                                .transition(.scale)
+                        }
+                        .onTapGesture {
+                            withAnimation {
+                                viewState.isOptionsExpanded.toggle()
                             }
                         }
-                        .padding()
+                        
+                        if viewState.isOptionsExpanded {
+                            VStack {
+                                Toggle("Include lowercase letters", isOn: $viewState.includeLowercase)
+                                Toggle("Include uppercase letters", isOn: $viewState.includeUppercase)
+                                Toggle("Include numbers", isOn: $viewState.includeNumbers)
+                                Toggle("Include special characters", isOn: $viewState.includeSpecialCharacters)
+                                
+                                VStack {
+                                    HStack {
+                                        Text("Length")
+                                            .font(.customFont(font: .lato, style: .regular))
+                                        Spacer()
+                                        Text("\(Int(viewState.passwordLength))")
+                                            .font(.customFont(font: .lato, style: .regular))
+                                    }
+                                    Slider(value: $viewState.passwordLength, in: 6...256, step: 1) {
+                                        Text("Length")
+                                            .font(.customFont(font: .lato, style: .regular))
+                                    } minimumValueLabel: {
+                                        Text("6")
+                                            .font(.customFont(font: .lato, style: .regular))
+                                    } maximumValueLabel: {
+                                        Text("256")
+                                            .font(.customFont(font: .lato, style: .regular))
+                                    }
+                                }
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color(.systemBackground))
+                                )
+                            }
+                            .transition(.scale.combined(with: .opacity))
+                            .padding()
+                            .background(Color(.systemBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
                     }
-                    .foregroundStyle(.primary, .blue)
                     .padding()
-                    
-                    Spacer()
                 }
                 .onAppear {
                     viewModel.generatePassword()
                 }
             }
+            .background(Color(.systemGroupedBackground))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
