@@ -13,6 +13,8 @@ class CreatePasswordViewState: ObservableObject {
     @Published var password: String
     @Published var url: String
     @Published var userId: String
+    @Published var isOptionsExpanded: Bool = false
+    @Published var isShowingFullPassword: Bool = false
     
     init() {
         self.name = ""

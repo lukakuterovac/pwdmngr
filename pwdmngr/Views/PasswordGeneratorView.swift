@@ -10,11 +10,14 @@ import SwiftUI
 struct PasswordGeneratorView: View {
     @StateObject private var viewModel = PasswordGeneratorViewModel()
     @ObservedObject private var viewState: PasswordGeneratorViewState
+    private var passwordGenerator: PasswordGenerator
+    @StateObject private var generatorOptions = GeneratorOptions.getInstance()
     
     init() {
         let viewModel = PasswordGeneratorViewModel()
         _viewModel = StateObject(wrappedValue: viewModel)
         _viewState = ObservedObject(wrappedValue: viewModel.viewState)
+        self.passwordGenerator = PasswordGenerator()
     }
     
     private var starsCount: String {
@@ -102,20 +105,20 @@ struct PasswordGeneratorView: View {
                         
                         if viewState.isOptionsExpanded {
                             VStack {
-                                Toggle("Include lowercase letters", isOn: $viewState.includeLowercase)
-                                Toggle("Include uppercase letters", isOn: $viewState.includeUppercase)
-                                Toggle("Include numbers", isOn: $viewState.includeNumbers)
-                                Toggle("Include special characters", isOn: $viewState.includeSpecialCharacters)
+                                Toggle("Include lowercase letters", isOn: $generatorOptions.includeLowercase)
+                                Toggle("Include uppercase letters", isOn: $generatorOptions.includeUppercase)
+                                Toggle("Include numbers", isOn: $generatorOptions.includeNumbers)
+                                Toggle("Include special characters", isOn: $generatorOptions.includeSpecialCharacters)
                                 
                                 VStack {
                                     HStack {
                                         Text("Length")
                                             .font(.customFont(font: .lato, style: .regular))
                                         Spacer()
-                                        Text("\(Int(viewState.passwordLength))")
+                                        Text("\(Int(generatorOptions.passwordLength))")
                                             .font(.customFont(font: .lato, style: .regular))
                                     }
-                                    Slider(value: $viewState.passwordLength, in: 6...256, step: 1) {
+                                    Slider(value: $generatorOptions.passwordLength, in: 6...256, step: 1) {
                                         Text("Length")
                                             .font(.customFont(font: .lato, style: .regular))
                                     } minimumValueLabel: {

@@ -10,7 +10,7 @@ import SwiftUI
 
 class CreatePasswordViewModel: ObservableObject {
     @Published var viewState: CreatePasswordViewState
-    
+
     var dataModel: PasswordDataModel
     var authViewModel: AuthViewModel
     

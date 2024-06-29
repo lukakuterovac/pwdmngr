@@ -32,6 +32,8 @@
 		6995647D2C3086DC00E2F491 /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6995647C2C3086DC00E2F491 /* CreatePasswordView.swift */; };
 		6995647F2C308C8400E2F491 /* CreatePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6995647E2C308C8400E2F491 /* CreatePasswordViewModel.swift */; };
 		699564812C308CAB00E2F491 /* CreatePasswordViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699564802C308CAB00E2F491 /* CreatePasswordViewState.swift */; };
+		699564842C30B87400E2F491 /* PasswordGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699564832C30B87400E2F491 /* PasswordGenerator.swift */; };
+		699564862C30BE3B00E2F491 /* GeneratorOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699564852C30BE3B00E2F491 /* GeneratorOptions.swift */; };
 		69DC35BD2C0E3C660002D39D /* pwdmngrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC35BC2C0E3C660002D39D /* pwdmngrApp.swift */; };
 		69DC35BF2C0E3C660002D39D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC35BE2C0E3C660002D39D /* ContentView.swift */; };
 		69DC35C12C0E3C680002D39D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69DC35C02C0E3C680002D39D /* Assets.xcassets */; };
@@ -74,6 +76,8 @@
 		6995647C2C3086DC00E2F491 /* CreatePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		6995647E2C308C8400E2F491 /* CreatePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordViewModel.swift; sourceTree = "<group>"; };
 		699564802C308CAB00E2F491 /* CreatePasswordViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordViewState.swift; sourceTree = "<group>"; };
+		699564832C30B87400E2F491 /* PasswordGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGenerator.swift; sourceTree = "<group>"; };
+		699564852C30BE3B00E2F491 /* GeneratorOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorOptions.swift; sourceTree = "<group>"; };
 		69DC35B92C0E3C660002D39D /* pwdmngr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pwdmngr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69DC35BC2C0E3C660002D39D /* pwdmngrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pwdmngrApp.swift; sourceTree = "<group>"; };
 		69DC35BE2C0E3C660002D39D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -240,6 +244,8 @@
 			children = (
 				69DC35E42C0E67790002D39D /* SensorDataManager.swift */,
 				69DC35E72C0E69330002D39D /* SeededRandomNumberGenerator.swift */,
+				699564832C30B87400E2F491 /* PasswordGenerator.swift */,
+				699564852C30BE3B00E2F491 /* GeneratorOptions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -333,6 +339,8 @@
 				6995647D2C3086DC00E2F491 /* CreatePasswordView.swift in Sources */,
 				69DC35E22C0E5AE20002D39D /* PasswordGeneratorView.swift in Sources */,
 				697975642C11DC170080FFA8 /* PasswordDetailsViewModel.swift in Sources */,
+				699564862C30BE3B00E2F491 /* GeneratorOptions.swift in Sources */,
+				699564842C30B87400E2F491 /* PasswordGenerator.swift in Sources */,
 				6963FFF52C0F45E000ABF9B4 /* PasswordGeneratorViewState.swift in Sources */,
 				697975602C11D9520080FFA8 /* PasswordListViewState.swift in Sources */,
 				69DC35DF2C0E59450002D39D /* TextExtension.swift in Sources */,

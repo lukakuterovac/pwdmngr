@@ -11,12 +11,15 @@ struct CreatePasswordView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: CreatePasswordViewModel
     @ObservedObject private var viewState: CreatePasswordViewState
-
+    private var passwordGenerator: PasswordGenerator
+    @StateObject private var generatorOptions = GeneratorOptions.getInstance()
+    
     
     init(dataModel: PasswordDataModel, authViewModel: AuthViewModel) {
         let viewModel = CreatePasswordViewModel(dataModel: dataModel, authViewModel: authViewModel)
         _viewModel = StateObject(wrappedValue: viewModel)
         _viewState = ObservedObject(wrappedValue: viewModel.viewState)
+        self.passwordGenerator = PasswordGenerator()
     }
     
     var body: some View {
@@ -33,9 +36,84 @@ struct CreatePasswordView: View {
                             .textInputAutocapitalization(.never)
                     }
                     Section(header: Text("Password")) {
-                        SecureField("Password", text: $viewState.password)
-                            .textInputAutocapitalization(.never)
+                        HStack {
+                            if viewState.isShowingFullPassword {
+                                TextField("Password", text: $viewState.password)
+                                    .textInputAutocapitalization(.never)
+                            } else {
+                                SecureField("Password", text: $viewState.password)
+                                    .textInputAutocapitalization(.never)
+                            }
+
+                            Button(action: {
+                                viewState.isShowingFullPassword.toggle()
+                            }) {
+                                Image(systemName: viewState.isShowingFullPassword ? "eye.slash" : "eye")
+                                    .foregroundColor(.secondary)
+                            }
+                        }
                     }
+                    
+                    
+                    Button(action: {
+                        print("Generate")
+                        self.viewState.password = passwordGenerator.generatePassword()
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Generate")
+                                .font(.customFont(font: .lato, style: .medium, size: 16))
+                                .foregroundColor(.white)
+                            Spacer()
+                        }
+                        .padding()
+                        .background(.blue)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .listRowInsets(EdgeInsets())
+                    
+                    VStack {
+                        HStack {
+                            Text("Options")
+                            Spacer()
+                            Image(systemName: viewState.isOptionsExpanded ? "chevron.down" : "chevron.up")
+                        }
+                        .onTapGesture {
+                            viewState.isOptionsExpanded.toggle()
+                        }
+                        
+                        VStack{
+                            if viewState.isOptionsExpanded {
+                                VStack {
+                                    Toggle("Include lowercase letters", isOn: $generatorOptions.includeLowercase)
+                                    Toggle("Include uppercase letters", isOn: $generatorOptions.includeUppercase)
+                                    Toggle("Include numbers", isOn: $generatorOptions.includeNumbers)
+                                    Toggle("Include special characters", isOn: $generatorOptions.includeSpecialCharacters)
+                                    
+                                    VStack {
+                                        HStack {
+                                            Text("Length")
+                                                .font(.customFont(font: .lato, style: .regular))
+                                            Spacer()
+                                            Text("\(Int(generatorOptions.passwordLength))")
+                                                .font(.customFont(font: .lato, style: .regular))
+                                        }
+                                        Slider(value: $generatorOptions.passwordLength, in: 6...256, step: 1) {
+                                            Text("Length")
+                                                .font(.customFont(font: .lato, style: .regular))
+                                        } minimumValueLabel: {
+                                            Text("6")
+                                                .font(.customFont(font: .lato, style: .regular))
+                                        } maximumValueLabel: {
+                                            Text("256")
+                                                .font(.customFont(font: .lato, style: .regular))
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
                     Section(header: Text("URL")) {
                         TextField("URL", text: $viewState.url)
                             .keyboardType(.URL)
