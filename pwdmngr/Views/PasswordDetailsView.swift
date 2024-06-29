@@ -44,30 +44,39 @@ struct PasswordDetailsView: View {
                         .autocapitalization(.none)
                         .disabled(!isEditing)
                 }
-                Section(header: Text("Actions")){
-                    HStack{
-                        Spacer()
-                        Text("Delete")
-                            .font(.customFont(font: .lato, style: .medium, size: 16))
-                            .foregroundStyle(.red)
-                            .onTapGesture {
-                                print("Delete")
-                                dismiss()
-                                viewModel.deleteItem()
-                            }
-                        Spacer()
+                Section(header: Text("Actions")) {
+                    Button(action: {
+                        dismiss()
+                        viewModel.deleteItem()
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Delete")
+                                .font(.customFont(font: .lato, style: .medium, size: 16))
+                                .foregroundColor(.white) // Ensure text is visible on colored background
+                            Spacer()
+                        }
+                        .padding()
+                        .background(isEditing ? .gray : .red)
                     }
-                    HStack{
-                        Spacer()
-                        Text("Favorite")
-                            .font(.customFont(font: .lato, style: .medium, size: 16))
-                            .foregroundStyle(.green)
-                            .onTapGesture {
-                                print("Favorite")
-                            }
-                        Spacer()
+                    .buttonStyle(PlainButtonStyle()) // Ensures the button does not have extra styling
+                    
+                    Button(action: {
+                        print("Favorite")
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Favorite")
+                                .font(.customFont(font: .lato, style: .medium, size: 16))
+                                .foregroundColor(.white) // Ensure text is visible on colored background
+                            Spacer()
+                        }
+                        .padding()
+                        .background(isEditing ? .gray : .green)
                     }
+                    .buttonStyle(PlainButtonStyle()) // Ensures the button does not have extra styling
                 }
+                .listRowInsets(EdgeInsets()) // Removes the default insets of the Section
             }
             .formStyle(.automatic)
             .navigationBarBackButtonHidden()
@@ -75,11 +84,22 @@ struct PasswordDetailsView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     HStack {
-                        Button("Back") {
-                            dismiss()
+                        HStack {
+                            if isEditing {
+                                Button("Cancel") {
+                                    editingPasswordItem = viewState.passwordItem
+                                    isEditing = false
+                                }
+                                .font(.customFont(font: .lato, style: .medium, size: 16))
+                            } else {
+                                Button("Back") {
+                                    dismiss()
+                                }
+                                .font(.customFont(font: .lato, style: .medium, size: 16))
+                                .disabled(isEditing)
+                            }
                         }
-                        .font(.customFont(font: .lato, style: .medium, size: 16))
-                        .disabled(isEditing)
+                        .frame(width: 60)
                         
                         Spacer()
                         

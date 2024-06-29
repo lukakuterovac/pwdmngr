@@ -34,8 +34,11 @@ class PasswordDetailsViewModel: ObservableObject {
     }
     
     func deleteItem() {
-        print("VM deleteItem")
         deleteItem(viewState.passwordItem)
+    }
+    
+    func addToFavorites() {
+        
     }
     
     private func updateItem(_ item: PasswordItem) {
