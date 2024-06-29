@@ -45,11 +45,6 @@ struct PasswordCard: View {
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color(.systemBackground))
-                .shadow(radius: 3)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.secondary, lineWidth: 1)
-                )
         )
     }
 }
