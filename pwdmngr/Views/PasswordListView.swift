@@ -11,6 +11,7 @@ struct PasswordListView: View {
     @EnvironmentObject private var dataModel: PasswordDataModel
     @StateObject private var viewModel: PasswordListViewModel
     @ObservedObject private var viewState: PasswordListViewState
+    @EnvironmentObject private var authViewModel: AuthViewModel
     
     init() {
         let viewModel = PasswordListViewModel(passwordItems: [])
@@ -21,6 +22,7 @@ struct PasswordListView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                Text(viewState.passwordItems.description)
                 ScrollView {
                     ForEach(viewState.passwordItems) { item in
                         NavigationLink(destination: PasswordDetailsView(passwordItem: item, dataModel: dataModel)
@@ -37,15 +39,21 @@ struct PasswordListView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    VStack {
+                    HStack {
+                        Spacer()
+                        
                         Text("Passwords")
                             .font(.customFont(font: .lato, style: .medium, size: 22))
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .fixedSize(horizontal: true, vertical: false)
+                        
+                        Spacer()
                     }
                 }
             }
         }
         .environmentObject(dataModel)
-        .onAppear {
+        .onAppear{
             updateViewState()
         }
         .onReceive(dataModel.objectWillChange) {

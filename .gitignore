@@ -46,3 +46,6 @@ profile
 
 # CocoaPods
 Pods/
+
+# Google Services Info Plist
+GoogleService-Info.plist

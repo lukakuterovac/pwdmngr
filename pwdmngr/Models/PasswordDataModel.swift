@@ -10,9 +10,7 @@ import Foundation
 class PasswordDataModel: ObservableObject {
     @Published var passwordItems: [PasswordItem] = []
     
-    init() {
-        self.passwordItems = PasswordItem.createMockPasswordItems()
-    }
+    init() {}
     
     func addItem(_ item: PasswordItem) {
         passwordItems.append(item)
@@ -26,5 +24,9 @@ class PasswordDataModel: ObservableObject {
     
     func deleteItem(_ item: PasswordItem) {
         passwordItems.removeAll { $0.id == item.id }
+    }
+    
+    func fetchItems() {
+        self.passwordItems = PasswordItem.createMockPasswordItems()
     }
 }
