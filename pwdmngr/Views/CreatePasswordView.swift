@@ -25,21 +25,21 @@ struct CreatePasswordView: View {
                 Form {
                     Section(header: Text("Name")) {
                         TextField("Name", text: $viewState.name)
-                            .autocapitalization(.none)
+                            .textInputAutocapitalization(.never)
                     }
                     Section(header: Text("Username/Email")) {
                         TextField("Username/Email", text: $viewState.username)
                             .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
+                            .textInputAutocapitalization(.never)
                     }
                     Section(header: Text("Password")) {
                         SecureField("Password", text: $viewState.password)
-                            .autocapitalization(.none)
+                            .textInputAutocapitalization(.never)
                     }
                     Section(header: Text("URL")) {
                         TextField("URL", text: $viewState.url)
                             .keyboardType(.URL)
-                            .autocapitalization(.none)
+                            .textInputAutocapitalization(.never)
                     }
                 }
                 .formStyle(.automatic)
