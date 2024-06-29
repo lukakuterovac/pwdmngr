@@ -11,7 +11,7 @@ struct PasswordCard: View {
     let passwordItem: PasswordItem
     
     var body: some View {
-        let faviconURL = "\(passwordItem.url)/favicon.ico"
+        let faviconURL = "https://\(passwordItem.url)/favicon.ico"
         
         HStack {
             if let faviconURL = URL(string: faviconURL) {
