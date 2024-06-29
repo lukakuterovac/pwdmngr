@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct PasswordListView: View {
-    @EnvironmentObject private var dataModel: PasswordDataModel
     @StateObject private var viewModel: PasswordListViewModel
     @ObservedObject private var viewState: PasswordListViewState
+    
     @EnvironmentObject private var authViewModel: AuthViewModel
+    @EnvironmentObject private var dataModel: PasswordDataModel
     
     init() {
         let viewModel = PasswordListViewModel()
@@ -27,26 +28,38 @@ struct PasswordListView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Color(.secondarySystemBackground))
                 } else {
-                    if viewState.passwordItems.count > 0 {
-                        ScrollView {
-                            ForEach(viewState.passwordItems) { item in
-                                NavigationLink(destination: PasswordDetailsView(passwordItem: item, dataModel: dataModel)) {
-                                    PasswordCard(passwordItem: item)
-                                        .padding(.horizontal)
-                                        .padding(.vertical, 3)
-                                }
-                                .buttonStyle(PlainButtonStyle())
+                    VStack {
+                        HStack {
+                            Text("Passwords")
+                            Spacer()
+                            NavigationLink(
+                                destination: CreatePasswordView(dataModel: dataModel, authViewModel: authViewModel)
+                            ) {
+                                Text("Add")
                             }
                         }
-                        .background(Color(.systemGroupedBackground))
-                    } else {
-                        VStack {
+                        .padding()
+                        
+                        if viewState.passwordItems.count > 0 {
+                            ScrollView {
+                                ForEach(viewState.passwordItems) { item in
+                                    NavigationLink(destination: PasswordDetailsView(passwordItem: item, dataModel: dataModel)) {
+                                        PasswordCard(passwordItem: item)
+                                            .padding(.horizontal)
+                                            .padding(.vertical, 3)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+                                }
+                                
+                            }
+                            .background(Color(.systemGroupedBackground))
+                        } else {
                             Spacer()
                             Text("No passwords found.")
                             Spacer()
                         }
-                        .background(Color(.systemGroupedBackground))
                     }
+                    .background(Color(.systemGroupedBackground))
                 }
             }
             .onAppear {
