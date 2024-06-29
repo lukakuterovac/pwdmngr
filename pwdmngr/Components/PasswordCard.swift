@@ -44,7 +44,9 @@ struct PasswordCard: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color(.systemBackground))
+                .fill(Color(UIColor { traitCollection in
+                    traitCollection.userInterfaceStyle == .dark ? UIColor.secondarySystemBackground : UIColor.systemBackground
+                }))
         )
     }
 }
