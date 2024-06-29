@@ -6,15 +6,18 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
 struct PasswordItem: Identifiable, Codable {
-    var id = UUID()
+    @DocumentID var id: String?
+    var userId: String
     var name: String
     var username: String
     var password: String
     var url: String
     
-    init(name: String = "", username: String = "", password: String = "", url: String = "") {
+    init(userId: String = "", name: String = "", username: String = "", password: String = "", url: String = "") {
+        self.userId = userId
         self.name = name
         self.username = username
         self.password = password

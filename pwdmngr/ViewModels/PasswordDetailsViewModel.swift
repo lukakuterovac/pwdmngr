@@ -22,18 +22,37 @@ class PasswordDetailsViewModel: ObservableObject {
         viewState.$passwordItem
             .dropFirst()
             .sink { [weak self] updatedItem in
-                self?.dataModel.updateItem(updatedItem)
+                guard let self = self else { return }
+                self.updateItem(updatedItem)
             }
             .store(in: &cancellables)
     }
     
     func saveChanges(passwordItem: PasswordItem) {
         viewState.passwordItem = passwordItem
-        dataModel.updateItem(viewState.passwordItem)
+        updateItem(viewState.passwordItem)
     }
     
     func deleteItem() {
         print("VM deleteItem")
-        dataModel.deleteItem(self.viewState.passwordItem)
+        deleteItem(viewState.passwordItem)
+    }
+    
+    private func updateItem(_ item: PasswordItem) {
+        dataModel.updateItem(item) { error in
+            if let error = error {
+                print("Error updating password item: \(error)")
+            }
+        }
+    }
+    
+    private func deleteItem(_ item: PasswordItem) {
+        dataModel.deleteItem(item) { error in
+            if let error = error {
+                print("Error deleting password item: \(error)")
+            } else {
+                // Successfully deleted, potentially dismiss view or update UI
+            }
+        }
     }
 }

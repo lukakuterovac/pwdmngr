@@ -14,7 +14,7 @@ struct PasswordListView: View {
     @EnvironmentObject private var authViewModel: AuthViewModel
     
     init() {
-        let viewModel = PasswordListViewModel(passwordItems: [])
+        let viewModel = PasswordListViewModel()
         _viewModel = StateObject(wrappedValue: viewModel)
         _viewState = ObservedObject(wrappedValue: viewModel.viewState)
     }
@@ -22,49 +22,68 @@ struct PasswordListView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text(viewState.passwordItems.description)
-                ScrollView {
-                    ForEach(viewState.passwordItems) { item in
-                        NavigationLink(destination: PasswordDetailsView(passwordItem: item, dataModel: dataModel)
-                        ) {
-                            PasswordCard(passwordItem: item)
-                                .padding(.horizontal)
-                                .padding(.vertical, 3)
+                if viewState.isLoading {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color(.secondarySystemBackground))
+                } else {
+                    if viewState.passwordItems.count > 0 {
+                        ScrollView {
+                            ForEach(viewState.passwordItems) { item in
+                                NavigationLink(destination: PasswordDetailsView(passwordItem: item, dataModel: dataModel)) {
+                                    PasswordCard(passwordItem: item)
+                                        .padding(.horizontal)
+                                        .padding(.vertical, 3)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
                         }
-                        .buttonStyle(PlainButtonStyle())
+                        .background(Color(.systemGroupedBackground))
+                    } else {
+                        VStack {
+                            Spacer()
+                            Text("No passwords found.")
+                            Spacer()
+                        }
+                        .background(Color(.systemGroupedBackground))
                     }
                 }
-                .background(Color(.systemGroupedBackground))
+            }
+            .onAppear {
+                viewState.isLoading = true
+                if let userId = authViewModel.currentUser?.id {
+                    dataModel.fetchItems(userId: userId) { result in
+                        defer { viewState.isLoading = false }
+                        switch result {
+                        case .success(let passwordItems):
+                            viewState.passwordItems = passwordItems
+                        case .failure(let error):
+                            print("Error fetching password items: \(error)")
+                        }
+                    }
+                } else {
+                    print("Current user not available for password fetching.")
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     HStack {
                         Spacer()
-                        
                         Text("Passwords")
                             .font(.customFont(font: .lato, style: .medium, size: 22))
                             .frame(minWidth: 0, maxWidth: .infinity)
                             .fixedSize(horizontal: true, vertical: false)
-                        
                         Spacer()
                     }
                 }
             }
+            .frame(maxWidth: .infinity)
+            .background(Color(.secondarySystemBackground))
         }
-        .environmentObject(dataModel)
-        .onAppear{
-            updateViewState()
-        }
-        .onReceive(dataModel.objectWillChange) {
-            updateViewState()
-        }
-    }
-    
-    private func updateViewState() {
-        viewState.passwordItems = dataModel.passwordItems
     }
 }
+
 
 #Preview {
     PasswordListView()

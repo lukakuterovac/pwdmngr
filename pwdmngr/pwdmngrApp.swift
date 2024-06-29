@@ -11,7 +11,7 @@ import Firebase
 @main
 struct pwdmngrApp: App {
     @StateObject var authViewModel = AuthViewModel()
-    @StateObject private var dataModel = PasswordDataModel()
+    @StateObject var dataModel = PasswordDataModel()
     @Environment(\.scenePhase) private var scenePhase
     
     init() {
@@ -21,8 +21,8 @@ struct pwdmngrApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environmentObject(dataModel)
                 .environmentObject(authViewModel)
+                .environmentObject(dataModel)
                 .onChange(of: scenePhase, handleScenePhaseChange)
         }
     }
@@ -58,8 +58,8 @@ struct MainView: View {
 }
 
 struct MainTabView: View {
-    @EnvironmentObject var dataModel: PasswordDataModel
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var dataModel: PasswordDataModel
     
     var body: some View {
         if authViewModel.currentUser != nil {
@@ -67,9 +67,6 @@ struct MainTabView: View {
                 PasswordListView()
                     .tabItem {
                         CustomLabel(title: "Passwords", systemImage: "list.dash", font: .customFont(font: .lato, style: .regular))
-                    }
-                    .onAppear {
-                        dataModel.fetchItems()
                     }
                 PasswordGeneratorView()
                     .tabItem {
@@ -82,9 +79,8 @@ struct MainTabView: View {
             }
         } else {
             ProgressView()
-                .task {
-                    dataModel.fetchItems()
-                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color(.secondarySystemBackground))
         }
     }
 }
