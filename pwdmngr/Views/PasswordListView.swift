@@ -32,6 +32,7 @@ struct PasswordListView: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                 }
+                .background(Color(.systemGroupedBackground))
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
