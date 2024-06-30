@@ -30,52 +30,41 @@ struct PasswordGeneratorView: View {
             ScrollView {
                 VStack {
                     VStack {
-                        HStack {
+                        HStack(alignment: .center) {
                             Text("Generated password")
                                 .font(.customFont(font: .lato, style: .regular, size: 20))
                             Spacer()
+                            Text("Copy")
+                                .font(.customFont(font: .lato, style: .regular, size: 16))
+                                .foregroundStyle(.blue)
                         }
                         HStack {
                             if viewState.isShowingFullPassword {
-                                Text(viewState.generatedPassword)
-                                    .font(.customFont(font: .lato, style: .regular))
+                                TextField("Password", text: $viewState.generatedPassword)
+                                    .textInputAutocapitalization(.never)
+                                    .disabled(true)
                                     .padding()
                             } else {
-                                Text(starsCount)
-                                    .font(.customFont(font: .lato, style: .regular))
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
+                                SecureField("Password", text: $viewState.generatedPassword)
+                                    .textInputAutocapitalization(.never)
+                                    .disabled(true)
                                     .padding()
                             }
                             
                             Spacer()
-                            
-                            HStack {
-                                Button(action: {
-                                    viewState.isShowingFullPassword.toggle()
-                                }) {
-                                    Image(systemName: viewState.isShowingFullPassword ? "eye.slash" : "eye")
-                                        .foregroundStyle(.foreground)
-                                }
-                                
-                                
-                                Button(action: {
-                                    UIPasteboard.general.string = viewState.generatedPassword
-                                }) {
-                                    Image(systemName: "doc.on.clipboard")
-                                        .foregroundStyle(.foreground)
-                                }
+                            Button(action: {
+                                viewState.isShowingFullPassword.toggle()
+                            }) {
+                                Image(systemName: viewState.isShowingFullPassword ? "eye.slash" : "eye")
+                                    .foregroundColor(.secondary)
                             }
                             .padding()
                         }
                         .background(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.primary, lineWidth: 0)
-                                .background(
-                                    Color(UIColor { traitCollection in
-                                        traitCollection.userInterfaceStyle == .dark ? UIColor.secondarySystemBackground : UIColor.systemBackground
-                                    }).cornerRadius(10)
-                                )
+                                .fill(Color(UIColor { traitCollection in
+                                    traitCollection.userInterfaceStyle == .dark ? UIColor.secondarySystemBackground : UIColor.systemBackground
+                                }))
                         )
                     }
                     .padding()
