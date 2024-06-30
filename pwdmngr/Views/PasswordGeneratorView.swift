@@ -34,19 +34,16 @@ struct PasswordGeneratorView: View {
                             Text("Generated password")
                                 .font(.customFont(font: .lato, style: .regular, size: 20))
                             Spacer()
-                            Text("Copy")
-                                .font(.customFont(font: .lato, style: .regular, size: 16))
-                                .foregroundStyle(.blue)
                         }
                         HStack {
                             if viewState.isShowingFullPassword {
-                                TextField("Password", text: $viewState.generatedPassword)
+                                Text(viewState.generatedPassword)
                                     .textInputAutocapitalization(.never)
-                                    .disabled(true)
                                     .padding()
                             } else {
                                 SecureField("Password", text: $viewState.generatedPassword)
                                     .textInputAutocapitalization(.never)
+                                    .selectionDisabled()
                                     .disabled(true)
                                     .padding()
                             }
@@ -69,16 +66,27 @@ struct PasswordGeneratorView: View {
                     }
                     .padding()
                     
-                    Button(action: viewModel.generatePassword) {
-                        Text("Generate Password")
-                            .font(.customFont(font: .lato, style: .regular, size: .h2))
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(viewModel.anyToggleSelected() ? Color.blue : Color.gray)
-                            .cornerRadius(10)
+                    Button("Copy") {
+                        UIPasteboard.general.string = viewState.generatedPassword
                     }
                     .padding()
+                    .font(.customFont(font: .lato, style: .regular, size: .h2))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.green.cornerRadius(10))
+                    .padding(.horizontal)
+                    .disabled(viewState.generatedPassword.isEmpty)
+                    .cornerRadius(10)
+                    
+                    Button("Generate") {
+                        viewModel.generatePassword()
+                    }
+                    .padding()
+                    .font(.customFont(font: .lato, style: .regular, size: .h2))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue.cornerRadius(10))
+                    .padding(.horizontal)
                     .disabled(!viewModel.anyToggleSelected())
                     
                     VStack {

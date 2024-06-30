@@ -54,6 +54,22 @@ struct CreatePasswordView: View {
                         }
                     }
                     
+                    Button(action: {
+                        print("Copy")
+                        UIPasteboard.general.string = viewState.password
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Copy")
+                                .font(.customFont(font: .lato, style: .medium, size: 16))
+                                .foregroundColor(.white)
+                            Spacer()
+                        }
+                        .padding()
+                        .background(.green)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .listRowInsets(EdgeInsets())
                     
                     Button(action: {
                         print("Generate")
