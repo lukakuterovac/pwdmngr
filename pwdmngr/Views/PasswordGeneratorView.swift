@@ -70,9 +70,11 @@ struct PasswordGeneratorView: View {
                         }
                         .background(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.primary, lineWidth: 1)
+                                .stroke(Color.primary, lineWidth: 0)
                                 .background(
-                                    Color(UIColor.systemBackground).cornerRadius(10)
+                                    Color(Color(UIColor { traitCollection in
+                                        traitCollection.userInterfaceStyle == .dark ? UIColor.secondarySystemBackground : UIColor.systemBackground
+                                    })).cornerRadius(10)
                                 )
                         )
                     }
