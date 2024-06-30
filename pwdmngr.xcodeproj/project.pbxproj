@@ -35,6 +35,7 @@
 		699564812C308CAB00E2F491 /* CreatePasswordViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699564802C308CAB00E2F491 /* CreatePasswordViewState.swift */; };
 		699564842C30B87400E2F491 /* PasswordGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699564832C30B87400E2F491 /* PasswordGenerator.swift */; };
 		699564862C30BE3B00E2F491 /* GeneratorOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699564852C30BE3B00E2F491 /* GeneratorOptions.swift */; };
+		69AD24402C31E6ED0064C133 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 69AD243F2C31E6ED0064C133 /* CryptoSwift */; };
 		69C911A52C317E810047C148 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C911A42C317E810047C148 /* KeychainHelper.swift */; };
 		69DC35BD2C0E3C660002D39D /* pwdmngrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC35BC2C0E3C660002D39D /* pwdmngrApp.swift */; };
 		69DC35BF2C0E3C660002D39D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC35BE2C0E3C660002D39D /* ContentView.swift */; };
@@ -109,6 +110,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				699564632C3057EE00E2F491 /* FirebaseFirestore in Frameworks */,
+				69AD24402C31E6ED0064C133 /* CryptoSwift in Frameworks */,
 				6995646D2C305A1300E2F491 /* FirebaseAuth in Frameworks */,
 				699564752C305C3500E2F491 /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -276,6 +278,7 @@
 				699564622C3057EE00E2F491 /* FirebaseFirestore */,
 				6995646C2C305A1300E2F491 /* FirebaseAuth */,
 				699564742C305C3500E2F491 /* FirebaseFirestoreSwift */,
+				69AD243F2C31E6ED0064C133 /* CryptoSwift */,
 			);
 			productName = pwdmngr;
 			productReference = 69DC35B92C0E3C660002D39D /* pwdmngr.app */;
@@ -307,6 +310,7 @@
 			mainGroup = 69DC35B02C0E3C660002D39D;
 			packageReferences = (
 				699564612C3057EE00E2F491 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				69AD243E2C31E6ED0064C133 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = 69DC35BA2C0E3C660002D39D /* Products */;
 			projectDirPath = "";
@@ -592,6 +596,14 @@
 				minimumVersion = 10.28.1;
 			};
 		};
+		69AD243E2C31E6ED0064C133 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -609,6 +621,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 699564612C3057EE00E2F491 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		69AD243F2C31E6ED0064C133 /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69AD243E2C31E6ED0064C133 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -17,8 +17,4 @@ class PasswordListViewModel: ObservableObject {
         let viewState = PasswordListViewState(passwordItems: passwordItems)
         self.viewState = viewState
     }
-    
-    func updateList(passwordItems: [PasswordItem]) {
-        self.viewState.passwordItems = passwordItems
-    }
 }
