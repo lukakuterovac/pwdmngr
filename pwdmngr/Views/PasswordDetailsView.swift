@@ -159,21 +159,6 @@ struct PasswordDetailsView: View {
                         .background(isEditing ? .gray : .red)
                     }
                     .buttonStyle(PlainButtonStyle()) // Ensures the button does not have extra styling
-                    
-                    Button(action: {
-                        print("Favorite")
-                    }) {
-                        HStack {
-                            Spacer()
-                            Text("Favorite")
-                                .font(.customFont(font: .lato, style: .medium, size: 16))
-                                .foregroundColor(.white) // Ensure text is visible on colored background
-                            Spacer()
-                        }
-                        .padding()
-                        .background(isEditing ? .gray : .green)
-                    }
-                    .buttonStyle(PlainButtonStyle()) // Ensures the button does not have extra styling
                 }
                 .listRowInsets(EdgeInsets()) // Removes the default insets of the Section
             }

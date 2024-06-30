@@ -37,10 +37,6 @@ class PasswordDetailsViewModel: ObservableObject {
         deleteItem(viewState.passwordItem)
     }
     
-    func addToFavorites() {
-        
-    }
-    
     private func updateItem(_ item: PasswordItem) {
         dataModel.updateItem(item) { error in
             if let error = error {
