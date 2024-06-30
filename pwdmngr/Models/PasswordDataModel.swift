@@ -49,6 +49,7 @@ class PasswordDataModel: ObservableObject {
             }
             
             passwordItems.append(item)
+            self.sortPasswordItemsByName()
             
             let encryptedItem = PasswordItem(userId: item.userId, name: item.name, username: encryptedEmail, password: encryptedPassword, url: item.url)
             
@@ -59,6 +60,10 @@ class PasswordDataModel: ObservableObject {
         } catch {
             completion(error)
         }
+    }
+    
+    func sortPasswordItemsByName() {
+        passwordItems.sort { $0.name < $1.name }
     }
     
     func updateItem(_ item: PasswordItem, completion: @escaping (Error?) -> Void) {
@@ -78,6 +83,8 @@ class PasswordDataModel: ObservableObject {
             
             let docRef = db.collection("passwords").document(documentId)
             try docRef.setData(from: encryptedItem)
+            
+            self.sortPasswordItemsByName()
             
             completion(nil)
         } catch let error {
@@ -108,7 +115,7 @@ class PasswordDataModel: ObservableObject {
                         return
                     }
                     
-                    let passwordItems: [PasswordItem] = documents.compactMap { document in
+                    var passwordItems: [PasswordItem] = documents.compactMap { document in
                         do {
                             var decryptedItem = try document.data(as: PasswordItem.self)
                             
@@ -122,6 +129,7 @@ class PasswordDataModel: ObservableObject {
                             return nil
                         }
                     }
+                    passwordItems.sort { $0.name < $1.name }
                     
                     completion(.success(passwordItems))
                 }
