@@ -12,6 +12,8 @@ struct PasswordDetailsView: View {
     @StateObject private var viewModel: PasswordDetailsViewModel
     @ObservedObject private var viewState: PasswordDetailsViewState
     
+    private var passwordGenerator: PasswordGenerator = PasswordGenerator()
+    @StateObject private var generatorOptions = GeneratorOptions.getInstance()
     @EnvironmentObject var dataModel: PasswordDataModel
     @State private var isEditing = false
     @State private var editingPasswordItem: PasswordItem
@@ -28,20 +30,99 @@ struct PasswordDetailsView: View {
             Form {
                 Section(header: Text("Name")) {
                     TextField("Name", text: $editingPasswordItem.name)
+                        .textInputAutocapitalization(.never)
                         .disabled(!isEditing)
                 }
                 Section(header: Text("Username/Email")) {
                     TextField("Username/Email", text: $editingPasswordItem.username)
+                        .textInputAutocapitalization(.never)
                         .disabled(!isEditing)
                 }
+
                 Section(header: Text("Password")) {
-                    SecureField("Password", text: $editingPasswordItem.password)
-                        .disabled(!isEditing)
+                    HStack {
+                        if viewState.isShowingFullPassword {
+                            TextField("Password", text: $editingPasswordItem.password)
+                                .textInputAutocapitalization(.never)
+                                .disabled(!isEditing)
+                        } else {
+                            SecureField("Password", text: $editingPasswordItem.password)
+                                .textInputAutocapitalization(.never)
+                                .disabled(!isEditing)
+                        }
+
+                        Button(action: {
+                            viewState.isShowingFullPassword.toggle()
+                        }) {
+                            Image(systemName: viewState.isShowingFullPassword ? "eye.slash" : "eye")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                if isEditing {
+                    Button(action: {
+                        print("Generate")
+                        self.editingPasswordItem.password = passwordGenerator.generatePassword()
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Generate")
+                                .font(.customFont(font: .lato, style: .medium, size: 16))
+                                .foregroundColor(.white)
+                            Spacer()
+                        }
+                        .padding()
+                        .background(.blue)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .listRowInsets(EdgeInsets())
+                    
+                    VStack {
+                        HStack {
+                            Text("Options")
+                            Spacer()
+                            Image(systemName: viewState.isOptionsExpanded ? "chevron.down" : "chevron.up")
+                        }
+                        .onTapGesture {
+                            viewState.isOptionsExpanded.toggle()
+                        }
+                        
+                        VStack{
+                            if viewState.isOptionsExpanded {
+                                VStack {
+                                    Toggle("Include lowercase letters", isOn: $generatorOptions.includeLowercase)
+                                    Toggle("Include uppercase letters", isOn: $generatorOptions.includeUppercase)
+                                    Toggle("Include numbers", isOn: $generatorOptions.includeNumbers)
+                                    Toggle("Include special characters", isOn: $generatorOptions.includeSpecialCharacters)
+                                    
+                                    VStack {
+                                        HStack {
+                                            Text("Length")
+                                                .font(.customFont(font: .lato, style: .regular))
+                                            Spacer()
+                                            Text("\(Int(generatorOptions.passwordLength))")
+                                                .font(.customFont(font: .lato, style: .regular))
+                                        }
+                                        Slider(value: $generatorOptions.passwordLength, in: 6...256, step: 1) {
+                                            Text("Length")
+                                                .font(.customFont(font: .lato, style: .regular))
+                                        } minimumValueLabel: {
+                                            Text("6")
+                                                .font(.customFont(font: .lato, style: .regular))
+                                        } maximumValueLabel: {
+                                            Text("256")
+                                                .font(.customFont(font: .lato, style: .regular))
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 Section(header: Text("URL")) {
                     TextField("URL", text: $editingPasswordItem.url)
                         .keyboardType(.URL)
-                        .autocapitalization(.none)
+                        .textInputAutocapitalization(.never)
                         .disabled(!isEditing)
                 }
                 Section(header: Text("Actions")) {
