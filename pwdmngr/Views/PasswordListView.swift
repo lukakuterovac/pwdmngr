@@ -83,7 +83,7 @@ struct PasswordListView: View {
                 ToolbarItem(placement: .principal) {
                     HStack {
                         Spacer()
-                        Text("Passwords")
+                        Text("pwdmngr")
                             .font(.customFont(font: .lato, style: .medium, size: 22))
                             .frame(minWidth: 0, maxWidth: .infinity)
                             .fixedSize(horizontal: true, vertical: false)
