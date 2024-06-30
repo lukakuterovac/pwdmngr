@@ -32,7 +32,9 @@ struct AccountView: View {
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(.secondarySystemBackground))
+                        .fill(Color(UIColor { traitCollection in
+                            traitCollection.userInterfaceStyle == .dark ? UIColor.secondarySystemBackground : UIColor.systemBackground
+                        }))
                 )
                 .padding()
                 
@@ -55,7 +57,6 @@ struct AccountView: View {
                         .padding()
                         .background(.red)
                     }
-                    .padding(.top, 4)
                     .cornerRadius(10)
                 }
                 .padding()
