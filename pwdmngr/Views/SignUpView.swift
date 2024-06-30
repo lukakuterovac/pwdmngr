@@ -54,6 +54,7 @@ struct SignUpView: View {
                 Text("Sign up")
                     .padding(.horizontal)
                     .padding(.vertical, 4)
+                    .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
             .padding(.top, 16)
@@ -78,7 +79,7 @@ struct SignUpView: View {
         }
         .padding(.horizontal, 32)
         .frame(maxWidth: .infinity)
-        .background(Color(.secondarySystemBackground))
+        .background(Color(.systemGroupedBackground))
     }
 }
 

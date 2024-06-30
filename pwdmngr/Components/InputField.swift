@@ -21,11 +21,26 @@ struct InputField: View {
             if isSecureField {
                 SecureField(placeholder, text: $text)
                     .font(.system(size: 14))
-                    .textFieldStyle(.roundedBorder)
+                    .padding(10)
+                    .background((Color(UIColor { traitCollection in
+                        traitCollection.userInterfaceStyle == .dark ? UIColor.secondarySystemBackground : UIColor.systemBackground
+                    })))                    .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color(.systemGray4), lineWidth: 0)
+                    )
             } else {
                 TextField(placeholder, text: $text)
                     .font(.system(size: 14))
-                    .textFieldStyle(.roundedBorder)
+                    .padding(10)
+                    .background((Color(UIColor { traitCollection in
+                        traitCollection.userInterfaceStyle == .dark ? UIColor.secondarySystemBackground : UIColor.systemBackground
+                    })))
+                    .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color(.systemGray4), lineWidth: 0)
+                    )
             }
         }
         .padding(.vertical, 6)

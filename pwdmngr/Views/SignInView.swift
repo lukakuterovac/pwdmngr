@@ -49,6 +49,7 @@ struct SignInView: View {
                     Text("Sign in")
                         .padding(.horizontal)
                         .padding(.vertical, 4)
+                        .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
                 .padding(.top, 16)
@@ -75,7 +76,7 @@ struct SignInView: View {
             }
             .padding(.horizontal, 32)
             .frame(maxWidth: .infinity)
-            .background(Color(.secondarySystemBackground))
+            .background(Color(.systemGroupedBackground))
         }
     }
 }
