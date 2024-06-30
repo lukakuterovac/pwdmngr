@@ -13,18 +13,60 @@ struct AccountView: View {
     var body: some View {
         if let user = authViewModel.currentUser {
             VStack {
-                Spacer()
-                Text("\(user.email)")
-                Button("Sign out") {
-                    authViewModel.signOut()
+                HStack {
+                    Circle()
+                        .fill(Color.random())
+                        .frame(width: 50, height: 50)
+                        .overlay(
+                            Text(user.email.prefix(2).uppercased())
+                                .foregroundColor(.white)
+                                .font(.system(size: 20, weight: .bold))
+                        )
+                    
+                    Text("\(user.email)")
+                        .padding(.leading, 10)
+                    
+                    Spacer()
                 }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color(.secondarySystemBackground))
+                )
+                .padding()
+                
+                VStack {
+                    HStack {
+                        Text("Actions")
+                        Spacer()
+                    }
+                    
+                    Button(action: {
+                        authViewModel.signOut()
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Sign Out")
+                                .font(.customFont(font: .lato, style: .medium, size: 16))
+                                .foregroundColor(.white)
+                            Spacer()
+                        }
+                        .padding()
+                        .background(.red)
+                    }
+                    .padding(.top, 4)
+                    .cornerRadius(10)
+                }
+                .padding()
+                
                 Spacer()
             }
             .frame(maxWidth: .infinity)
-            .background(Color(.secondarySystemBackground))
+            .background(Color(.systemGroupedBackground))
         } else {
             ProgressView()
-                .background(Color(.secondarySystemBackground))
+                .background(Color(.systemGroupedBackground))
         }
     }
 }

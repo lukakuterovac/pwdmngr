@@ -12,6 +12,7 @@
 		694360D52C0EF9A2008EA1A8 /* PasswordListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694360D42C0EF9A2008EA1A8 /* PasswordListViewModel.swift */; };
 		694360D82C0EF9C8008EA1A8 /* PasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694360D72C0EF9C8008EA1A8 /* PasswordItem.swift */; };
 		694360DA2C0EF9F6008EA1A8 /* PasswordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694360D92C0EF9F6008EA1A8 /* PasswordCard.swift */; };
+		696287642C315D3800EB61E7 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696287632C315D3800EB61E7 /* ColorExtension.swift */; };
 		6963FFF32C0F445E00ABF9B4 /* PasswordGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6963FFF22C0F445E00ABF9B4 /* PasswordGeneratorViewModel.swift */; };
 		6963FFF52C0F45E000ABF9B4 /* PasswordGeneratorViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6963FFF42C0F45E000ABF9B4 /* PasswordGeneratorViewState.swift */; };
 		697975602C11D9520080FFA8 /* PasswordListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6979755F2C11D9520080FFA8 /* PasswordListViewState.swift */; };
@@ -59,6 +60,7 @@
 		694360D42C0EF9A2008EA1A8 /* PasswordListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListViewModel.swift; sourceTree = "<group>"; };
 		694360D72C0EF9C8008EA1A8 /* PasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordItem.swift; sourceTree = "<group>"; };
 		694360D92C0EF9F6008EA1A8 /* PasswordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCard.swift; sourceTree = "<group>"; };
+		696287632C315D3800EB61E7 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		6963FFF22C0F445E00ABF9B4 /* PasswordGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorViewModel.swift; sourceTree = "<group>"; };
 		6963FFF42C0F45E000ABF9B4 /* PasswordGeneratorViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorViewState.swift; sourceTree = "<group>"; };
 		6979755F2C11D9520080FFA8 /* PasswordListViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListViewState.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				69DC35E72C0E69330002D39D /* SeededRandomNumberGenerator.swift */,
 				699564832C30B87400E2F491 /* PasswordGenerator.swift */,
 				699564852C30BE3B00E2F491 /* GeneratorOptions.swift */,
+				696287632C315D3800EB61E7 /* ColorExtension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				6963FFF52C0F45E000ABF9B4 /* PasswordGeneratorViewState.swift in Sources */,
 				697975602C11D9520080FFA8 /* PasswordListViewState.swift in Sources */,
 				69DC35DF2C0E59450002D39D /* TextExtension.swift in Sources */,
+				696287642C315D3800EB61E7 /* ColorExtension.swift in Sources */,
 				699564812C308CAB00E2F491 /* CreatePasswordViewState.swift in Sources */,
 				6995647B2C30670D00E2F491 /* AccountView.swift in Sources */,
 				6963FFF32C0F445E00ABF9B4 /* PasswordGeneratorViewModel.swift in Sources */,
