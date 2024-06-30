@@ -10,6 +10,7 @@ import Foundation
 class SignInViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
+    private var keychain = KeychainHelper.shared
     
     init() {}
     
@@ -26,6 +27,13 @@ class SignInViewModel: ObservableObject {
     
     private func validatePassword() -> Bool {
         if !password.isEmpty && password.count >= 6 {
+            return true
+        }
+        return false
+    }
+    
+    func credentialsAvailable() -> Bool {
+        if let email = keychain.getEmail() {
             return true
         }
         return false

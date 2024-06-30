@@ -34,7 +34,6 @@ struct pwdmngrApp: App {
             authViewModel.signOut()
         case .inactive:
             print("App is inactive")
-            authViewModel.signOut()
         case .active:
             print("App is active")
         @unknown default:

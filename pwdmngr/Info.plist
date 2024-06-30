@@ -13,5 +13,7 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>To help you generate more random passwords.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Authenticate quickly using FaceID</string>
 </dict>
 </plist>

@@ -26,6 +26,7 @@ struct SignUpView: View {
                     .bold()
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
+                    .frame(maxWidth: .infinity)
                     .foregroundColor(.red)
                     .background(
                         RoundedRectangle(cornerRadius: 8)
